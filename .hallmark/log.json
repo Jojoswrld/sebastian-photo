@@ -1,0 +1,27 @@
+[
+ {
+  "shape": "Feature Stack",
+  "theme": "atelier",
+  "axes": "light/roman-serif/cool",
+  "hero": "Ledge",
+  "nav": "edge-aligned",
+  "footer": "letter close",
+  "imagery": "photographs, the user's own 11",
+  "photos": [],
+  "entry": "site/index.html",
+  "fingerprint": "feature-stack/ledge/edge/letter/table/switcher",
+  "sections": [
+   "hero: matted print",
+   "case: sticky diptych",
+   "table: delivery ledger",
+   "switcher: sample strips",
+   "close: contact card",
+   "footer: letter close"
+  ],
+  "signature": "the Xanadu shoot as a pinned case, six plates scrolling past the brief",
+  "waived": [],
+  "prompt": "Demo portfolio for a hospitality photographer in La Fortuna",
+  "date": "2026-11-05",
+  "mode": "build"
+ }
+]

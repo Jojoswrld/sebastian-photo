@@ -1,0 +1,6 @@
+# downloads used while choosing photos (duplicates of site/img)
+raw/
+# Cloudflare and Hallmark working files
+.wrangler/
+site/.hallmark/shots/
+node_modules/
