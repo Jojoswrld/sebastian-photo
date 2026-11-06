@@ -1,4 +1,4 @@
-Live: https://sebastian-hidalgo-photo.karabi-bots.workers.dev (Cloudflare Worker, Joseph's account)
+Live: https://sebastian-hidalgo-photo.arenalweb.workers.dev (Cloudflare Worker, Joseph's account)
 
 To update after a change:
 1. node _src/build.mjs                (from the site folder)
