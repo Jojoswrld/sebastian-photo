@@ -32,7 +32,6 @@ const T = {
     ledgerLead: (name) => `From the ${name} shoot: one shared folder, ready for your website, booking listings and social media.`,
     thFolder: 'Deliverable', thHolds: 'What it covers', thFiles: 'Amount',
     filmHead: 'The villa in motion', filmLead: (name) => `Drone film and a vertical reel from the ${name} shoot.`,
-    filmNote: 'Short silent loops play here. The full films, with sound, open from Google Drive.',
     workHead: 'Villas and hotels, shot so far', workOpen: 'Open the project',
     servicesHead: 'Rooms, facades, details and the volcano', servicesLabel: 'What I shoot',
     services: [
@@ -70,7 +69,6 @@ const T = {
     ledgerLead: (name) => `De la sesión en ${name}: una carpeta compartida, lista para su web, las plataformas de reserva y redes sociales.`,
     thFolder: 'Entrega', thHolds: 'Qué incluye', thFiles: 'Cantidad',
     filmHead: 'La villa en movimiento', filmLead: (name) => `Video con dron y un reel vertical de la sesión en ${name}.`,
-    filmNote: 'Aquí se ven clips cortos sin sonido. Los videos completos, con sonido, se abren desde Google Drive.',
     workHead: 'Villas y hoteles fotografiados', workOpen: 'Abrir el proyecto',
     servicesHead: 'Cuartos, fachadas, detalles y el volcán', servicesLabel: 'Qué fotografío',
     services: [
@@ -96,7 +94,6 @@ const ICON = {
   close: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
   prev: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>',
   next: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>',
-  play: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg>',
 };
 
 /* paths: every page knows its depth, so the same templates work in /, /work/, /es/ and /es/work/ */
@@ -273,15 +270,11 @@ const films = (t, p, L, P) => `  <section class="film-band" id="film" aria-label
         <p class="lead">${t.filmLead(p.name)}</p>
       </div>
 ${p.films.map((f, i) => `      <figure class="film film--${f.shape}">
-        <div class="film__frame" data-film="${f.drive}" data-film-title="${f.name[L]}">
+        <div class="film__frame">
           <video class="film__loop" src="${P.a(f.loop)}" poster="${P.a(f.posterSmall || f.poster)}" width="${f.w}" height="${f.h}" muted loop playsinline preload="none" aria-hidden="true" data-loop></video>
-          <a class="film__play" href="https://drive.google.com/file/d/${f.drive}/view" target="_blank" rel="noopener">
-            <span class="film__badge">${ICON.play}<span>${f.play[L]}</span></span>
-          </a>
         </div>
         <figcaption class="wall wall--dark"><span class="wall__name">${f.name[L]}</span> <span class="wall__note">${f.note[L]}</span></figcaption>
       </figure>`).join('\n')}
-      <p class="film-band__note">${t.filmNote}</p>
     </div>
   </section>
 `;

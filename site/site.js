@@ -201,22 +201,6 @@
     loops.forEach((v) => lio.observe(v));
   }
 
-  /* ---------- films: load the Drive player only when asked ---------- */
-  document.querySelectorAll('[data-film]').forEach((frame) => {
-    const link = frame.querySelector('.film__play');
-    if (!link) return;
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const f = document.createElement('iframe');
-      f.src = `https://drive.google.com/file/d/${frame.dataset.film}/preview`;
-      f.title = frame.dataset.filmTitle || '';
-      f.allow = 'autoplay; fullscreen';
-      f.allowFullscreen = true;
-      frame.replaceChildren(f);
-      f.focus();
-    });
-  });
-
   /* ---------- the photo viewer ---------- */
   const dlg = document.querySelector('.viewer');
   if (dlg && typeof dlg.showModal === 'function') {

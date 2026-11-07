@@ -85,12 +85,10 @@ export const projects = [
     films: [
       { drive: '1Stk4nPyi4nQVbZQ6upRMGpN-bQSBrVXM', shape: 'wide', poster: 'img/film-poster.jpg', posterSmall: 'img/film-poster-1200.jpg', w: 1800, h: 1012,
         name: { en: 'Drone film', es: 'Video con dron' }, note: { en: 'Horizontal, for the website and booking listings', es: 'Horizontal, para el sitio web y las plataformas de reservas' },
-        loop: 'film/drone-loop.mp4',
-        play: { en: 'Watch the full film', es: 'Ver el video completo' } },
+        loop: 'film/drone-loop.mp4' },
       { drive: '1I_g67vbj00AeXFLqb5OsgRajybxWYEEm', shape: 'tall', poster: 'img/reel-poster.jpg', w: 900, h: 1600,
         name: { en: 'Reel', es: 'Reel' }, note: { en: 'Vertical, for social media', es: 'Vertical, para redes sociales' },
-        loop: 'film/reel-loop.mp4',
-        play: { en: 'Watch the full reel', es: 'Ver el reel completo' } },
+        loop: 'film/reel-loop.mp4' },
     ],
     ledger: [
       { folder: { en: 'Camera photos', es: 'Fotos con cámara' }, holds: { en: 'Rooms, pool, kitchen, baths and small details', es: 'Cuartos, piscina, cocina, baños y detalles' }, files: { en: '23 photos', es: '23 fotos' } },
