@@ -4,3 +4,6 @@ raw/
 .wrangler/
 site/.hallmark/shots/
 node_modules/
+
+# deploy staging copy of the site
+site/_deploy/public/
