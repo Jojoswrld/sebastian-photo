@@ -10,6 +10,8 @@ const SITE = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE_URL = 'https://sebastian-hidalgo-photo.arenalweb.workers.dev';
 const EMAIL = 'sebastianhidalgoarce@gmail.com';
 const WHATSAPP = { href: 'https://wa.me/50683071130', label: '+506&nbsp;8307&nbsp;1130' };
+// the first line of the chat, already typed when someone taps the WhatsApp link
+const waLink = (t) => `${WHATSAPP.href}?text=${encodeURIComponent(t.waHello)}`;
 
 const T = {
   en: {
@@ -26,9 +28,9 @@ const T = {
     heroCap: 'Pool and Arenal Volcano, Villa Xanadú, April 2026', heroFrame: 'La Fortuna, Costa Rica',
     client: 'Client', shot: 'Shot', place: 'Place', delivered: 'Delivered',
     framesLabel: 'Frames in this shoot', seeAll: (n) => `See all ${n} photos`,
-    ledgerHead: (name) => `Everything from one ${name.replace('Villa ', '')} shoot`,
-    ledgerLead: 'One shared folder, sorted by where each file goes.',
-    thFolder: 'Folder', thHolds: 'What it holds', thFiles: 'Files',
+    ledgerHead: () => 'What you receive',
+    ledgerLead: (name) => `From the ${name} shoot: one shared folder, ready for your website, booking listings and social media.`,
+    thFolder: 'Deliverable', thHolds: 'What it covers', thFiles: 'Amount',
     filmHead: 'The villa in motion', filmLead: (name) => `Drone film and a vertical reel from the ${name} shoot.`,
     filmNote: 'Plays from Google Drive.',
     workHead: 'Villas and hotels, shot so far', workOpen: 'Open the project',
@@ -40,6 +42,7 @@ const T = {
       ['air', 'From the air', 'Drone stills and film of the grounds and the volcano.', 's-air', 1012, '--stain-4', 'Arenal Volcano and the green valley below it, seen from a drone at dawn', 'Arenal Volcano from the drone, April 2026'],
     ],
     contactHead: 'Tell me about your property', contactLine: 'Send the place, the dates and where the photos will be used.',
+    waHello: 'Hi Sebastián, I’d like to ask about a photo shoot for my property.',
     email: 'Email', basedIn: 'Based in', basedWhere: 'La Fortuna, Alajuela, Costa Rica', subject: 'Photo shoot enquiry',
     footPlace: 'La Fortuna, Costa Rica, 2026', footCredit: 'Photographs: Sebastián Hidalgo Arce, Villa Xanadú, April 2026.',
     still: 'Still the background', move: 'Move the background',
@@ -63,9 +66,9 @@ const T = {
     heroCap: 'Piscina y volcán Arenal, Villa Xanadú, abril 2026', heroFrame: 'La Fortuna, Costa Rica',
     client: 'Cliente', shot: 'Fecha', place: 'Lugar', delivered: 'Entrega',
     framesLabel: 'Tomas de esta sesión', seeAll: (n) => `Ver las ${n} fotos`,
-    ledgerHead: (name) => `La entrega de ${name.replace('Villa ', '')}`,
-    ledgerLead: 'Una carpeta compartida, ordenada según dónde va cada archivo.',
-    thFolder: 'Carpeta', thHolds: 'Qué contiene', thFiles: 'Archivos',
+    ledgerHead: () => 'Lo que usted recibe',
+    ledgerLead: (name) => `De la sesión en ${name}: una carpeta compartida, lista para su web, las plataformas de reserva y redes sociales.`,
+    thFolder: 'Entrega', thHolds: 'Qué incluye', thFiles: 'Cantidad',
     filmHead: 'La villa en movimiento', filmLead: (name) => `Video con dron y un reel vertical de la sesión en ${name}.`,
     filmNote: 'Se reproduce desde Google Drive.',
     workHead: 'Villas y hoteles fotografiados', workOpen: 'Abrir el proyecto',
@@ -77,6 +80,7 @@ const T = {
       ['air', 'Desde el aire', 'Fotos y video con dron del terreno y del volcán.', 's-air', 1012, '--stain-4', 'El volcán Arenal y el valle verde a sus pies, desde un dron al amanecer', 'El volcán Arenal desde el dron, abril 2026'],
     ],
     contactHead: 'Cuénteme sobre su propiedad', contactLine: 'Envíe el lugar, las fechas y dónde se usarán las fotos.',
+    waHello: 'Hola Sebastián, quisiera consultar por una sesión de fotos para mi propiedad.',
     email: 'Correo', basedIn: 'Ubicación', basedWhere: 'La Fortuna, Alajuela, Costa Rica', subject: 'Consulta de sesión de fotos',
     footPlace: 'La Fortuna, Costa Rica, 2026', footCredit: 'Fotografías: Sebastián Hidalgo Arce, Villa Xanadú, abril 2026.',
     still: 'Detener el fondo', move: 'Mover el fondo',
@@ -190,7 +194,7 @@ const contact = (t) => `  <section class="contact" id="contact" data-air-zone ar
         </div>
         <dl class="card__fields">
           <div><dt>${t.email}</dt><dd><a class="card__link" href="mailto:${EMAIL}?subject=${encodeURIComponent(t.subject)}">${EMAIL}</a></dd></div>
-          <div><dt>WhatsApp</dt><dd><a class="card__link" href="${WHATSAPP.href}">${WHATSAPP.label}</a></dd></div>
+          <div><dt>WhatsApp</dt><dd><a class="card__link" href="${waLink(t)}">${WHATSAPP.label}</a></dd></div>
           <div><dt>${t.basedIn}</dt><dd>${t.basedWhere}</dd></div>
         </dl>
       </div>
@@ -248,7 +252,7 @@ const ledger = (t, p, L) => `  <section class="delivery" aria-labelledby="delive
     <div class="container delivery__inner">
       <div class="delivery__head">
         <h2 id="delivery-title">${t.ledgerHead(p.name)}</h2>
-        <p class="lead">${t.ledgerLead}</p>
+        <p class="lead">${t.ledgerLead(p.name)}</p>
       </div>
       <table class="ledger">
         <thead>

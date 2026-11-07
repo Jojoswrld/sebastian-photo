@@ -91,10 +91,10 @@ export const projects = [
         play: { en: 'Play the vertical reel', es: 'Reproducir el reel vertical' } },
     ],
     ledger: [
-      { folder: { en: 'Camera', es: 'Cámara' }, holds: { en: 'Rooms, pool, kitchen, baths and small details', es: 'Cuartos, piscina, cocina, baños y detalles' }, files: { en: '23 stills', es: '23 fotos' } },
-      { folder: { en: 'Drone', es: 'Dron' }, holds: { en: 'The villa, its grounds and Arenal from above', es: 'La villa, el terreno y el Arenal desde arriba' }, files: { en: '9 stills', es: '9 fotos' } },
-      { folder: { en: 'Drone horizontal', es: 'Dron horizontal' }, holds: { en: 'A wide film for the website and listings', es: 'Video horizontal para la web y las reservas' }, files: { en: 'Video', es: 'Video' } },
-      { folder: { en: 'Reels, vertical', es: 'Reels, vertical' }, holds: { en: 'A drone reel cut tall for social media', es: 'Reel con dron en vertical para redes' }, files: { en: 'Video', es: 'Video' } },
+      { folder: { en: 'Camera photos', es: 'Fotos con cámara' }, holds: { en: 'Rooms, pool, kitchen, baths and small details', es: 'Cuartos, piscina, cocina, baños y detalles' }, files: { en: '23 photos', es: '23 fotos' } },
+      { folder: { en: 'Drone photos', es: 'Fotos con dron' }, holds: { en: 'The villa, its grounds and Arenal from above', es: 'La villa, el terreno y el Arenal desde arriba' }, files: { en: '9 photos', es: '9 fotos' } },
+      { folder: { en: 'Drone film', es: 'Video con dron' }, holds: { en: 'A wide film for the website and booking listings', es: 'Video horizontal para la web y las plataformas de reserva' }, files: { en: '1 film', es: '1 video' } },
+      { folder: { en: 'Vertical reel', es: 'Reel vertical' }, holds: { en: 'A drone reel cut tall for Instagram and TikTok', es: 'Reel con dron en vertical para Instagram y TikTok' }, files: { en: '1 reel', es: '1 reel' } },
     ],
   },
 ];
