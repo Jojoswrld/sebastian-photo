@@ -190,6 +190,17 @@
     });
   });
 
+  /* ---------- film loops: play only while on screen; stay still for reduced motion or data saver ---------- */
+  const saveData = navigator.connection && navigator.connection.saveData;
+  const loops = document.querySelectorAll('[data-loop]');
+  if (loops.length && !reduced && !saveData && 'IntersectionObserver' in window) {
+    const lio = new IntersectionObserver((es) => es.forEach((e) => {
+      const v = e.target;
+      if (e.isIntersecting) { const p = v.play(); if (p) p.catch(() => {}); } else v.pause();
+    }), { threshold: 0.25 });
+    loops.forEach((v) => lio.observe(v));
+  }
+
   /* ---------- films: load the Drive player only when asked ---------- */
   document.querySelectorAll('[data-film]').forEach((frame) => {
     const link = frame.querySelector('.film__play');

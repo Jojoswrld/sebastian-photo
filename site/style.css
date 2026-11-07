@@ -189,7 +189,7 @@ html:not(.js) [data-air-toggle] { display: none; }
 .film__frame { position: relative; overflow: hidden; aspect-ratio: 16 / 9; background: var(--color-ink-2); }
 .film--tall .film__frame { aspect-ratio: 9 / 16; }
 .film__play { position: absolute; inset: 0; display: block; color: var(--color-ink); text-decoration: none; }
-.film__play img { width: 100%; height: 100%; object-fit: cover; }
+.film__loop { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .film__badge { position: absolute; left: var(--space-md); bottom: var(--space-md); display: inline-flex; align-items: center; gap: var(--space-xs); min-height: 44px; padding: 0 var(--space-md) 0 var(--space-sm); border-radius: var(--radius-pill); background: var(--color-paper); color: var(--color-ink); font-size: var(--text-sm); white-space: nowrap; transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
 .film__play:hover .film__badge { background: var(--color-accent); color: var(--color-accent-ink); }
 .film__play:active .film__badge { background: var(--color-ink-2); color: var(--color-paper); }
@@ -295,7 +295,7 @@ html.viewer-open { overflow-y: hidden; }
 }
 
 /* ---------- photos fade in as they arrive, instead of an empty box snapping to a picture ---------- */
-.plate__frame, .panel__frame, .print__window, .gallery__link, .film__play { background-color: var(--color-paper-2); }
+.plate__frame, .panel__frame, .print__window, .gallery__link { background-color: var(--color-paper-2); }
 .js img.is-pending { opacity: 0; }
 .js img.is-arriving { transition: opacity var(--dur-long) var(--ease-out); }
 

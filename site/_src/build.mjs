@@ -32,7 +32,7 @@ const T = {
     ledgerLead: (name) => `From the ${name} shoot: one shared folder, ready for your website, booking listings and social media.`,
     thFolder: 'Deliverable', thHolds: 'What it covers', thFiles: 'Amount',
     filmHead: 'The villa in motion', filmLead: (name) => `Drone film and a vertical reel from the ${name} shoot.`,
-    filmNote: 'Plays from Google Drive.',
+    filmNote: 'Short silent loops play here. The full films, with sound, open from Google Drive.',
     workHead: 'Villas and hotels, shot so far', workOpen: 'Open the project',
     servicesHead: 'Rooms, facades, details and the volcano', servicesLabel: 'What I shoot',
     services: [
@@ -70,7 +70,7 @@ const T = {
     ledgerLead: (name) => `De la sesión en ${name}: una carpeta compartida, lista para su web, las plataformas de reserva y redes sociales.`,
     thFolder: 'Entrega', thHolds: 'Qué incluye', thFiles: 'Cantidad',
     filmHead: 'La villa en movimiento', filmLead: (name) => `Video con dron y un reel vertical de la sesión en ${name}.`,
-    filmNote: 'Se reproduce desde Google Drive.',
+    filmNote: 'Aquí se ven clips cortos sin sonido. Los videos completos, con sonido, se abren desde Google Drive.',
     workHead: 'Villas y hoteles fotografiados', workOpen: 'Abrir el proyecto',
     servicesHead: 'Cuartos, fachadas, detalles y el volcán', servicesLabel: 'Qué fotografío',
     services: [
@@ -274,8 +274,8 @@ const films = (t, p, L, P) => `  <section class="film-band" id="film" aria-label
       </div>
 ${p.films.map((f, i) => `      <figure class="film film--${f.shape}">
         <div class="film__frame" data-film="${f.drive}" data-film-title="${f.name[L]}">
+          <video class="film__loop" src="${P.a(f.loop)}" poster="${P.a(f.posterSmall || f.poster)}" width="${f.w}" height="${f.h}" muted loop playsinline preload="none" aria-hidden="true" data-loop></video>
           <a class="film__play" href="https://drive.google.com/file/d/${f.drive}/view" target="_blank" rel="noopener">
-            <img src="${P.a(f.poster)}"${f.posterSmall ? ` srcset="${P.a(f.posterSmall)} 1200w, ${P.a(f.poster)} ${f.w}w" sizes="${SIZES.wide}"` : ''} width="${f.w}" height="${f.h}" alt="" loading="lazy" decoding="async">
             <span class="film__badge">${ICON.play}<span>${f.play[L]}</span></span>
           </a>
         </div>
