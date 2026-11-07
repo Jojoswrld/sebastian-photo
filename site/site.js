@@ -7,6 +7,19 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(ready);
   setTimeout(ready, 1200);
 
+  /* ---------- lazy photos fade in once loaded ---------- */
+  document.querySelectorAll('img[loading="lazy"]').forEach((im) => {
+    if (im.complete) return;
+    im.classList.add('is-pending');
+    const done = () => {
+      im.classList.add('is-arriving');
+      void im.offsetWidth; // commit the hidden state so the fade runs
+      im.classList.remove('is-pending');
+    };
+    im.addEventListener('load', done, { once: true });
+    im.addEventListener('error', done, { once: true });
+  });
+
   /* ---------- tokens to linear rgb ---------- */
   const probe = document.createElement('canvas');
   probe.width = probe.height = 1;

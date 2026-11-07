@@ -1,0 +1,14 @@
+# Cloudflare caching rules (copied into "public" with the rest of the site).
+# Photos rarely change; when one does, give it a new file name.
+/img/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+
+/favicon.svg
+  Cache-Control: public, max-age=604800
+
+# CSS and JS can change with any update, so browsers check back after an hour.
+/*.css
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/*.js
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400

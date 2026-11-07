@@ -83,7 +83,7 @@ export const projects = [
       air('dr-0064', 'Roof, pool and slide from overhead', 'Techo, piscina y tobogán desde arriba'),
     ],
     films: [
-      { drive: '1Stk4nPyi4nQVbZQ6upRMGpN-bQSBrVXM', shape: 'wide', poster: 'img/film-poster.jpg', w: 1800, h: 1012,
+      { drive: '1Stk4nPyi4nQVbZQ6upRMGpN-bQSBrVXM', shape: 'wide', poster: 'img/film-poster.jpg', posterSmall: 'img/film-poster-1200.jpg', w: 1800, h: 1012,
         name: { en: 'Drone film', es: 'Video con dron' }, note: { en: 'Horizontal, for the website and booking listings', es: 'Horizontal, para el sitio web y las plataformas de reservas' },
         play: { en: 'Play the drone film', es: 'Reproducir el video con dron' } },
       { drive: '1I_g67vbj00AeXFLqb5OsgRajybxWYEEm', shape: 'tall', poster: 'img/reel-poster.jpg', w: 900, h: 1600,

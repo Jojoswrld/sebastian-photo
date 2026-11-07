@@ -6,12 +6,14 @@ import { fileURLToPath } from 'node:url';
 import { projects } from './projects.mjs';
 
 const SITE = join(dirname(fileURLToPath(import.meta.url)), '..');
+// the live address, used for link previews (WhatsApp, iMessage, Facebook need full URLs)
+const SITE_URL = 'https://sebastian-hidalgo-photo.arenalweb.workers.dev';
 const EMAIL = 'sebastianhidalgoarce@gmail.com';
 const WHATSAPP = { href: 'https://wa.me/50683071130', label: '+506&nbsp;8307&nbsp;1130' };
 
 const T = {
   en: {
-    htmlLang: 'en',
+    htmlLang: 'en', ogLocale: 'en_US',
     title: 'Sebastián Hidalgo Arce, hospitality photographer in La Fortuna, Costa Rica',
     desc: 'Architecture, interior and drone photography for hotels, villas and brands around Arenal Volcano, Costa Rica.',
     skip: 'Skip to content', home: 'Sebastián Hidalgo Arce, home', mainNav: 'Main',
@@ -21,7 +23,7 @@ const T = {
     heroLead: 'Architecture, interiors and drone work for hotels, villas and brands.',
     heroCta: 'Enquire about a shoot', heroLink: 'See the Xanadú shoot',
     heroAlt: 'An infinity pool running toward a lawn and Arenal Volcano under a clear sky',
-    heroCap: 'Pool and Arenal Volcano, Villa Xanadú, April 2026', heroFrame: 'Frame 2 of 23',
+    heroCap: 'Pool and Arenal Volcano, Villa Xanadú, April 2026', heroFrame: 'La Fortuna, Costa Rica',
     client: 'Client', shot: 'Shot', place: 'Place', delivered: 'Delivered',
     framesLabel: 'Frames in this shoot', seeAll: (n) => `See all ${n} photos`,
     ledgerHead: (name) => `Everything from one ${name.replace('Villa ', '')} shoot`,
@@ -33,7 +35,7 @@ const T = {
     servicesHead: 'Rooms, facades, details and the volcano', servicesLabel: 'What I shoot',
     services: [
       ['arch', 'Architecture', 'Facades, entrances and the roofline against the sky.', 's-architecture', 1200, '--stain-3', 'The stone entrance wall of Villa Xanadú under a timber roof edge and blue sky', 'Entrance wall, Villa Xanadú'],
-      ['int', 'Interiors', 'Rooms in daylight, the wood and stone in true colour.', 's-interiors', 1200, '--stain-2', 'An open-air dining table and outdoor kitchen framed by banana leaves', 'Outdoor kitchen and dining, Villa Xanadú'],
+      ['int', 'Interiors', 'Rooms in daylight, the wood and stone in true colour.', 's-interiors', 1200, '--stain-2', 'A bunk room with two beds below two lofted bunks and a timber ladder between them', 'Bunk room, Villa Xanadú'],
       ['det', 'Details', 'Lamps, fittings, linen: the things guests touch.', 's-details', 1200, '--stain-1', 'Two woven rattan lamps glowing beside a cane-framed mirror', 'Rattan lamps in a guest bathroom, Villa Xanadú'],
       ['air', 'From the air', 'Drone stills and film of the grounds and the volcano.', 's-air', 1012, '--stain-4', 'Arenal Volcano and the green valley below it, seen from a drone at dawn', 'Arenal Volcano from the drone, April 2026'],
     ],
@@ -45,9 +47,10 @@ const T = {
     groundHead: 'On the ground', groundLead: 'Rooms, pool and details, shot on camera.',
     airHead: 'From the air', airLead: 'The villa, its grounds and Arenal from the drone.',
     backHome: 'Back to the home page',
+    lostTitle: 'Page not found', lostHead: 'This page isn’t here.', lostLead: 'The link may be old or mistyped. The photographs are all on the home page.',
   },
   es: {
-    htmlLang: 'es',
+    htmlLang: 'es', ogLocale: 'es_CR',
     title: 'Sebastián Hidalgo Arce, fotógrafo de hospitalidad en La Fortuna, Costa Rica',
     desc: 'Fotografía de arquitectura, interiores y dron para hoteles, villas y marcas alrededor del volcán Arenal, Costa Rica.',
     skip: 'Saltar al contenido', home: 'Sebastián Hidalgo Arce, inicio', mainNav: 'Principal',
@@ -57,7 +60,7 @@ const T = {
     heroLead: 'Arquitectura, interiores y dron para hoteles, villas y marcas.',
     heroCta: 'Cotizar una sesión', heroLink: 'Ver la sesión de Xanadú',
     heroAlt: 'Una piscina infinita que corre hacia el jardín y el volcán Arenal bajo un cielo despejado',
-    heroCap: 'Piscina y volcán Arenal, Villa Xanadú, abril 2026', heroFrame: 'Toma 2 de 23',
+    heroCap: 'Piscina y volcán Arenal, Villa Xanadú, abril 2026', heroFrame: 'La Fortuna, Costa Rica',
     client: 'Cliente', shot: 'Fecha', place: 'Lugar', delivered: 'Entrega',
     framesLabel: 'Tomas de esta sesión', seeAll: (n) => `Ver las ${n} fotos`,
     ledgerHead: (name) => `La entrega de ${name.replace('Villa ', '')}`,
@@ -69,7 +72,7 @@ const T = {
     servicesHead: 'Cuartos, fachadas, detalles y el volcán', servicesLabel: 'Qué fotografío',
     services: [
       ['arch', 'Arquitectura', 'Fachadas, entradas y el techo contra el cielo.', 's-architecture', 1200, '--stain-3', 'El muro de piedra de la entrada de Villa Xanadú bajo un alero de madera y cielo azul', 'Muro de la entrada, Villa Xanadú'],
-      ['int', 'Interiores', 'Luz natural, madera y piedra en su color real.', 's-interiors', 1200, '--stain-2', 'Un comedor y cocina al aire libre enmarcados por hojas de plátano', 'Cocina y comedor exterior, Villa Xanadú'],
+      ['int', 'Interiores', 'Luz natural, madera y piedra en su color real.', 's-interiors', 1200, '--stain-2', 'Un cuarto con dos camas bajo dos camarotes elevados y una escalera de madera entre ellos', 'Cuarto de camarotes, Villa Xanadú'],
       ['det', 'Detalles', 'Lámparas, grifería, ropa de cama: lo que tocan los huéspedes.', 's-details', 1200, '--stain-1', 'Dos lámparas tejidas de ratán encendidas junto a un espejo de bejuco', 'Lámparas de ratán en un baño, Villa Xanadú'],
       ['air', 'Desde el aire', 'Fotos y video con dron del terreno y del volcán.', 's-air', 1012, '--stain-4', 'El volcán Arenal y el valle verde a sus pies, desde un dron al amanecer', 'El volcán Arenal desde el dron, abril 2026'],
     ],
@@ -81,6 +84,7 @@ const T = {
     groundHead: 'En tierra', groundLead: 'Cuartos, piscina y detalles, con cámara.',
     airHead: 'Desde el aire', airLead: 'La villa, el terreno y el Arenal desde el dron.',
     backHome: 'Volver al inicio',
+    lostTitle: 'Página no encontrada', lostHead: 'Esta página no existe.', lostLead: 'El enlace puede estar viejo o mal escrito. Todas las fotos están en la página de inicio.',
   },
 };
 
@@ -110,6 +114,13 @@ const page = (lang, kind, slug) => {
   };
 };
 const gimg = (P, id, size) => P.a(`img/g/${id}-${size}.jpg`);
+// how wide each kind of photo shows, so phones fetch the 1200px file instead of the big one
+const SIZES = {
+  hero: '(max-width: 60rem) 100vw, 90vw',
+  plate: '(max-width: 60rem) 100vw, 56vw',
+  panel: '(max-width: 60rem) 100vw, 60vw',
+  wide: '(max-width: 60rem) 100vw, 70vw',
+};
 
 /* ---------- shared chrome ---------- */
 const head = (t, P, title) => `<!doctype html>
@@ -119,8 +130,22 @@ const head = (t, P, title) => `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${title}</title>
 <meta name="description" content="${t.desc}">
-<link rel="alternate" hreflang="en" href="${P.alt.en}">
+${P.alt ? `<link rel="alternate" hreflang="en" href="${P.alt.en}">
 <link rel="alternate" hreflang="es" href="${P.alt.es}">
+` : ''}<link rel="icon" href="${P.a('favicon.svg')}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="${P.a('img/apple-touch-icon.png')}">
+<meta name="theme-color" content="#efe9e1">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sebastián Hidalgo Arce">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${t.desc}">
+${P.file ? `<meta property="og:url" content="${SITE_URL}/${P.file}">
+` : ''}<meta property="og:image" content="${SITE_URL}/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${t.heroAlt}">
+<meta property="og:locale" content="${t.ogLocale}">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -246,7 +271,7 @@ const films = (t, p, L, P) => `  <section class="film-band" id="film" aria-label
 ${p.films.map((f, i) => `      <figure class="film film--${f.shape}">
         <div class="film__frame" data-film="${f.drive}" data-film-title="${f.name[L]}">
           <a class="film__play" href="https://drive.google.com/file/d/${f.drive}/view" target="_blank" rel="noopener">
-            <img src="${P.a(f.poster)}" width="${f.w}" height="${f.h}" alt="" loading="lazy" decoding="async">
+            <img src="${P.a(f.poster)}"${f.posterSmall ? ` srcset="${P.a(f.posterSmall)} 1200w, ${P.a(f.poster)} ${f.w}w" sizes="${SIZES.wide}"` : ''} width="${f.w}" height="${f.h}" alt="" loading="lazy" decoding="async">
             <span class="film__badge">${ICON.play}<span>${f.play[L]}</span></span>
           </a>
         </div>
@@ -263,7 +288,7 @@ const services = (t, P) => `  <section class="services" id="services" data-air-z
       <div class="sampler" data-sampler>
         <div class="choices" role="tablist" aria-label="${t.servicesLabel}" aria-orientation="vertical">
 ${t.services.map(([k, title, line, img, h, tint], i) => `          <button class="choice" role="tab" id="tab-${k}" aria-controls="panel-${k}" aria-selected="${i === 0}"${i ? ' tabindex="-1"' : ''} data-tint="${tint}" type="button">
-            <img class="choice__thumb" src="${P.a(`img/${img}.jpg`)}" width="1800" height="${h}" alt="" loading="lazy" decoding="async">
+            <img class="choice__thumb" src="${P.a(`img/${img}-320.jpg`)}" width="320" height="240" alt="" loading="lazy" decoding="async">
             <span class="choice__text"><span class="choice__title">${title}</span><span class="choice__line">${line}</span></span>
           </button>`).join('\n')}
         </div>
@@ -271,7 +296,7 @@ ${t.services.map(([k, title, line, img, h, tint], i) => `          <button class
         <div class="panels">
 ${t.services.map(([k, title, , img, h, , alt, cap]) => `          <section class="panel" role="tabpanel" id="panel-${k}" aria-labelledby="tab-${k}">
             <div class="panel__frame" data-slot="service-${k}" data-alt="${alt}">
-              <img src="${P.a(`img/${img}.jpg`)}" width="1800" height="${h}" alt="${alt}" loading="lazy" decoding="async">
+              <img src="${P.a(`img/${img}-1200.jpg`)}" srcset="${P.a(`img/${img}-1200.jpg`)} 1200w, ${P.a(`img/${img}.jpg`)} 1800w" sizes="${SIZES.panel}" width="1800" height="${h}" alt="${alt}" loading="lazy" decoding="async">
             </div>
             <p class="wall"><span class="wall__name">${title}</span> <span class="wall__note">${cap}</span></p>
           </section>`).join('\n')}
@@ -335,7 +360,7 @@ const homePage = (L) => {
     <div class="container hero__inner">
       <figure class="print stock">
         <div class="print__window" data-slot="hero" data-alt="Sebastián's strongest wide frame: a pool, a room or a facade with the land behind it">
-          <img src="${P.a('img/hero-pool-volcano.jpg')}" width="2400" height="1600" alt="${t.heroAlt}" style="object-position: 50% 42%" fetchpriority="high" decoding="async">
+          <img src="${P.a('img/hero-pool-volcano.jpg')}" srcset="${P.a('img/hero-pool-volcano-1200.jpg')} 1200w, ${P.a('img/hero-pool-volcano.jpg')} 2400w" sizes="${SIZES.hero}" width="2400" height="1600" alt="${t.heroAlt}" style="object-position: 50% 42%" fetchpriority="high" decoding="async">
         </div>
         <figcaption class="print__label">
           <span class="pencil">${t.heroFrame}</span>
@@ -362,16 +387,16 @@ const homePage = (L) => {
         <h2 id="case-title">${p.name}, ${p.place[L].split(',')[0]}</h2>
         <p class="lead">${p.summary[L]}</p>
         ${facts(t, p, L)}
+        <a class="btn case__all" href="${P.project(p.slug)}">${t.seeAll(total)}</a>
         <ol class="plates" aria-label="${t.framesLabel}">
 ${p.plates.map((pl, i) => `          <li data-plate="${i + 1}"><a href="#plate-${i + 1}">${pl.name[L]}</a></li>`).join('\n')}
         </ol>
-        <a class="btn case__all" href="${P.project(p.slug)}">${t.seeAll(total)}</a>
       </div>
 
       <div class="pane-scroll">
 ${p.plates.map((pl, i) => `        <figure class="plate" id="plate-${i + 1}" data-plate-figure="${i + 1}">
           <a class="plate__frame" href="${gimg(P, pl.full, 2400)}" data-viewer="plates" data-caption="${pl.name[L]}" data-slot="xanadu-${i + 1}" data-alt="${pl.alt.en}">
-            <img src="${P.a(pl.src)}" width="${pl.w}" height="${pl.h}" alt="${pl.alt[L]}" loading="lazy" decoding="async">
+            <img src="${P.a(pl.src)}" srcset="${gimg(P, pl.full, 1200)} 1200w, ${P.a(pl.src)} 1800w" sizes="${SIZES.plate}" width="${pl.w}" height="${pl.h}" alt="${pl.alt[L]}" loading="lazy" decoding="async">
           </a>
           <figcaption class="wall"><span class="wall__name">${pl.name[L]}</span> <span class="wall__note">${pl.note[L]}</span></figcaption>
         </figure>`).join('\n')}
@@ -401,7 +426,7 @@ const projectPage = (L, p) => {
       ${facts(t, p, L)}
       <figure class="print stock project-hero__print">
         <a class="print__window" href="${gimg(P, p.cover.id, 2400)}" data-viewer="cover" data-caption="${p.cover.alt[L]}" data-slot="project-cover" data-alt="The project's widest establishing frame">
-          <img src="${gimg(P, p.cover.id, 2400)}" width="${p.cover.w}" height="${p.cover.h}" alt="${p.cover.alt[L]}" fetchpriority="high" decoding="async">
+          <img src="${gimg(P, p.cover.id, 2400)}" srcset="${gimg(P, p.cover.id, 1200)} 1200w, ${gimg(P, p.cover.id, 2400)} 2400w" sizes="${SIZES.wide}" width="${p.cover.w}" height="${p.cover.h}" alt="${p.cover.alt[L]}" fetchpriority="high" decoding="async">
         </a>
         <figcaption class="print__label"><span class="pencil">${p.client}</span><span>${p.place[L]}, ${p.date[L]}</span></figcaption>
       </figure>
@@ -416,9 +441,34 @@ ${contact(t)}
 ` + footer(t, P, false);
 };
 
+/* one 404 for the whole site: Cloudflare serves it at any depth, so every path starts at the root.
+   English first, with the Spanish lines under it. */
+const lostPage = () => {
+  const t = T.en, s = T.es;
+  const P = { a: (p) => `/${p}` };
+  return head(t, P, `${t.lostTitle}, Sebastián Hidalgo Arce`).replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex">') + `<main id="main">
+  <section class="lost" data-air-zone aria-labelledby="lost-title">
+    <div class="container lost__inner">
+      <h1 id="lost-title">${t.lostHead}</h1>
+      <p class="lead">${t.lostLead}</p>
+      <p class="lead" lang="es">${s.lostHead} ${s.lostLead}</p>
+      <div class="actions">
+        <a class="btn" href="/">${t.backHome}</a>
+        <a class="link" href="/es/" lang="es">${s.backHome}</a>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="/site.js" defer></script>
+</body>
+</html>
+`;
+};
+
 /* ---------- write ---------- */
 const out = (rel, html) => { const f = join(SITE, rel); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, html); console.log('wrote', rel); };
 for (const L of ['en', 'es']) {
   out(page(L, 'home').file, homePage(L));
   for (const p of projects) out(page(L, 'project', p.slug).file, projectPage(L, p));
 }
+out('404.html', lostPage());
