@@ -147,6 +147,39 @@
     };
   })();
 
+  /* ---------- the hero: crossfade through frames from different jobs ----------
+     every 6s; waits for the next photo to load; pauses on hover, off screen or in a hidden tab;
+     stops back on the first frame after two rounds; never moves for reduced motion */
+  const hero = document.querySelector('[data-hero]');
+  if (hero && !reduced) {
+    const slides = [...hero.querySelectorAll('.hero__slide')];
+    const count = document.querySelector('[data-hero-count]');
+    const cap = document.querySelector('[data-hero-cap]');
+    const fig = hero.closest('figure') || hero;
+    let at = 0, rounds = 0, timer = 0, hovered = false, seen = true;
+    const show = (i) => {
+      slides[at].classList.remove('is-on');
+      at = i;
+      slides[at].classList.add('is-on');
+      if (count) count.textContent = `${at + 1} / ${slides.length}`;
+      if (cap) cap.textContent = slides[at].dataset.cap || '';
+    };
+    const tick = () => {
+      if (hovered || !seen || document.hidden) return;
+      const next = (at + 1) % slides.length;
+      if (!slides[next].complete || !slides[next].naturalWidth) return; // try again next tick
+      if (next === 0) rounds += 1;
+      show(next);
+      if (rounds >= 2) { clearInterval(timer); timer = 0; }
+    };
+    if (slides.length > 1) {
+      timer = setInterval(tick, 6000);
+      fig.addEventListener('pointerenter', () => { hovered = true; });
+      fig.addEventListener('pointerleave', () => { hovered = false; });
+      new IntersectionObserver((es) => { seen = es[0].isIntersecting; }).observe(hero);
+    }
+  }
+
   /* ---------- the service choices ---------- */
   document.querySelectorAll('[data-sampler]').forEach((box) => {
     const tabs = [...box.querySelectorAll('[role="tab"]')];

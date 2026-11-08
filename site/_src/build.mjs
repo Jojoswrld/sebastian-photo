@@ -27,7 +27,6 @@ const T = {
     heroLead: 'Architecture, interiors, food and drone work for hotels, villas and experiences.',
     heroCta: 'Enquire about a shoot', heroLink: 'See the Xanadú shoot', heroLinkWork: 'See the work',
     heroAlt: 'An infinity pool running toward a lawn and Arenal Volcano under a clear sky',
-    heroCap: 'Pool and Arenal Volcano, Villa Xanadú, April 2026', heroFrame: 'La Fortuna, Costa Rica',
     client: 'Client', shot: 'Shot', place: 'Place', delivered: 'Delivered',
     framesLabel: 'Frames in this shoot', seeAll: (n) => `See all ${n} photos`,
     ledgerHead: () => 'What you receive',
@@ -75,7 +74,6 @@ const T = {
     heroLead: 'Arquitectura, interiores, comida y dron para hoteles, villas y experiencias.',
     heroCta: 'Cotizar una sesión', heroLink: 'Ver la sesión de Xanadú', heroLinkWork: 'Ver los trabajos',
     heroAlt: 'Una piscina infinita que corre hacia el jardín y el volcán Arenal bajo un cielo despejado',
-    heroCap: 'Piscina y volcán Arenal, Villa Xanadú, abril 2026', heroFrame: 'La Fortuna, Costa Rica',
     client: 'Cliente', shot: 'Fecha', place: 'Lugar', delivered: 'Entrega',
     framesLabel: 'Tomas de esta sesión', seeAll: (n) => `Ver las ${n} fotos`,
     ledgerHead: () => 'Lo que usted recibe',
@@ -449,6 +447,25 @@ const schema = (t, P) => {
   return `<script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n</script>\n`;
 };
 
+/* ---------- the hero: five frames from different jobs, crossfading (site.js) ---------- */
+const HERO = [
+  { big: 'img/hero-pool-volcano.jpg', small: 'img/hero-pool-volcano-1200.jpg', w: 2400, h: 1600, pos: '50% 42%',
+    alt: { en: 'An infinity pool running toward a lawn and Arenal Volcano under a clear sky', es: 'Una piscina infinita que corre hacia el jardín y el volcán Arenal bajo un cielo despejado' },
+    cap: { en: 'Pool and Arenal Volcano, Villa Xanadú, April 2026', es: 'Piscina y volcán Arenal, Villa Xanadú, abril 2026' } },
+  { big: 'img/g/ar-04848-2400.jpg', small: 'img/g/ar-04848-1200.jpg', w: 2400, h: 1600, pos: '50% 55%',
+    alt: { en: 'A Costa Rican casado with patacones, rice, beans, chicken and a starfruit juice', es: 'Un casado con patacones, arroz, frijoles, pollo y un fresco con carambola' },
+    cap: { en: 'Casado from the cooking class, Arenal Ridge, February 2025', es: 'Casado de la clase de cocina, Arenal Ridge, febrero 2025' } },
+  { big: 'img/g/dr-0029-2400.jpg', small: 'img/g/dr-0029-1200.jpg', w: 2400, h: 1350, pos: '50% 40%',
+    alt: { en: 'Arenal Volcano above the green valley, from a drone', es: 'El volcán Arenal sobre el valle verde, desde un dron' },
+    cap: { en: 'Arenal Volcano from the drone, April 2026', es: 'El volcán Arenal desde el dron, abril 2026' } },
+  { big: 'img/g/pf-04-full.jpg', small: 'img/g/pf-04-1200.jpg', w: 1600, h: 900, pos: '50% 50%',
+    alt: { en: 'A villa with a long infinity pool and sun loungers, from a drone', es: 'Una villa con una piscina larga y camastros, desde un dron' },
+    cap: { en: 'A villa pool from the drone', es: 'Piscina de una villa, desde el dron' } },
+  { big: 'img/g/pf-14-full.jpg', small: 'img/g/pf-14-1200.jpg', w: 1600, h: 900, pos: '50% 50%',
+    alt: { en: 'A plunge pool and deck hidden in the rainforest, from above', es: 'Una piscina y un deck escondidos en el bosque, desde arriba' },
+    cap: { en: 'A plunge pool in the rainforest, from above', es: 'Una piscina en el bosque, desde arriba' } },
+];
+
 /* ---------- pages ---------- */
 const homePage = (L) => {
   const t = T[L], P = page(L, 'home');
@@ -460,12 +477,12 @@ const homePage = (L) => {
   <section class="hero" data-air-zone aria-labelledby="hero-title">
     <div class="container hero__inner">
       <figure class="print stock">
-        <div class="print__window" data-slot="hero" data-alt="Sebastián's strongest wide frame: a pool, a room or a facade with the land behind it">
-          <img src="${P.a('img/hero-pool-volcano.jpg')}" srcset="${P.a('img/hero-pool-volcano-1200.jpg')} 1200w, ${P.a('img/hero-pool-volcano.jpg')} 2400w" sizes="${SIZES.hero}" width="2400" height="1600" alt="${t.heroAlt}" style="object-position: 50% 42%" fetchpriority="high" decoding="async">
+        <div class="print__window" data-slot="hero" data-hero data-alt="Sebastián's strongest wide frame: a pool, a room or a facade with the land behind it">
+${HERO.map((s, i) => `          <img class="hero__slide${i ? '' : ' is-on'}" src="${P.a(s.big)}" srcset="${P.a(s.small)} 1200w, ${P.a(s.big)} ${s.w}w" sizes="${SIZES.hero}" width="${s.w}" height="${s.h}" alt="${s.alt[L]}" data-cap="${s.cap[L]}" style="object-position: ${s.pos}"${i ? ' fetchpriority="low"' : ' fetchpriority="high"'} decoding="async">`).join('\n')}
         </div>
         <figcaption class="print__label">
-          <span class="pencil">${t.heroFrame}</span>
-          <span>${t.heroCap}</span>
+          <span class="pencil" data-hero-count>1 / ${HERO.length}</span>
+          <span data-hero-cap aria-live="off">${HERO[0].cap[L]}</span>
         </figcaption>
       </figure>
 
