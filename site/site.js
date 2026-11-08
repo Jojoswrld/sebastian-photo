@@ -147,17 +147,6 @@
     };
   })();
 
-  const toggle = document.querySelector('[data-air-toggle]');
-  if (toggle) {
-    if (!air || reduced) toggle.parentElement.hidden = true;
-    else toggle.addEventListener('click', () => {
-      const held = !air.held();
-      air.hold(held);
-      toggle.setAttribute('aria-pressed', String(held));
-      toggle.textContent = held ? toggle.dataset.labelMove : toggle.dataset.labelStill;
-    });
-  }
-
   /* ---------- the service choices ---------- */
   document.querySelectorAll('[data-sampler]').forEach((box) => {
     const tabs = [...box.querySelectorAll('[role="tab"]')];

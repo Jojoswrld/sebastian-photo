@@ -57,7 +57,6 @@ const T = {
     },
     email: 'Email', basedIn: 'Based in', basedWhere: 'La Fortuna, Alajuela, Costa Rica', subject: 'Photo shoot enquiry',
     footNav: 'Footer',
-    still: 'Still the background', move: 'Move the background',
     viewer: { label: 'Photo viewer', close: 'Close', prev: 'Previous photo', next: 'Next photo', of: 'of' },
     groundHead: 'On the ground', groundLead: 'Rooms, pool and details, shot on camera.',
     airHead: 'From the air', airLead: 'The villa, its grounds and Arenal from the drone.',
@@ -105,7 +104,6 @@ const T = {
     },
     email: 'Correo', basedIn: 'Ubicación', basedWhere: 'La Fortuna, Alajuela, Costa Rica', subject: 'Consulta de sesión de fotos',
     footNav: 'Pie de página',
-    still: 'Detener el fondo', move: 'Mover el fondo',
     viewer: { label: 'Visor de fotos', close: 'Cerrar', prev: 'Foto anterior', next: 'Foto siguiente', of: 'de' },
     groundHead: 'En tierra', groundLead: 'Cuartos, piscina y detalles, con cámara.',
     airHead: 'Desde el aire', airLead: 'La villa, el terreno y el Arenal desde el dron.',
@@ -276,7 +274,6 @@ ${INSTAGRAM ? `      <li><a class="reach" href="https://www.instagram.com/${INST
     </nav>
     <div class="footer__base">
       <p>© 2026 Sebastián Hidalgo Arce · ${t.basedWhere}</p>
-      <span class="footer__toggle"><button class="link link--button" type="button" data-air-toggle data-label-still="${t.still}" data-label-move="${t.move}" aria-pressed="false">${t.still}</button></span>
     </div>
   </div>
 </footer>

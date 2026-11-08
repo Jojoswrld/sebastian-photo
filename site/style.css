@@ -173,13 +173,10 @@ html { background: var(--color-paper); }
 .reach:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 4px; }
 .footer__nav { margin-top: var(--space-xl); }
 .footer__base { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-xs) var(--space-lg); margin-top: var(--space-md); padding-top: var(--space-md); border-top: var(--rule-hair) solid var(--color-rule); font-size: var(--text-sm); color: var(--color-muted); }
-.footer__base .link--button { min-height: 44px; color: var(--color-muted); text-decoration: underline; text-decoration-color: var(--color-rule); text-underline-offset: 0.3em; }
-.footer__base .link--button:hover { color: var(--color-ink); text-decoration-color: var(--color-accent); }
 .footer__links { display: flex; flex-wrap: wrap; gap: var(--space-2xs) var(--space-lg); margin: 0; padding: 0; list-style: none; }
 .footer__links a, .footer__links .link--button { min-height: 44px; display: inline-flex; align-items: center; color: var(--color-ink-2); white-space: nowrap; text-decoration: underline; text-decoration-color: var(--color-rule); text-underline-offset: 0.3em; transition: text-decoration-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
 .footer__links a:hover, .footer__links .link--button:hover { color: var(--color-ink); text-decoration-color: var(--color-accent); }
 .footer__links a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
-html:not(.js) [data-air-toggle] { display: none; }
 
 /* ---------- case extras ---------- */
 .case__all { justify-self: start; margin-top: var(--space-xs); }
