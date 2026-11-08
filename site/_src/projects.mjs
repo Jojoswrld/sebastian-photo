@@ -97,4 +97,61 @@ export const projects = [
       { folder: { en: 'Vertical reel', es: 'Reel vertical' }, holds: { en: 'A drone reel cut tall for Instagram and TikTok', es: 'Reel con dron en vertical para Instagram y TikTok' }, files: { en: '1 reel', es: '1 reel' } },
     ],
   },
+  {
+    // Guests' faces are left out on purpose: only food, hands and the kitchen are shown.
+    slug: 'arenal-ridge',
+    name: 'Arenal Ridge',
+    client: 'Karabi Villas',
+    place: { en: 'La Fortuna, Alajuela', es: 'La Fortuna, Alajuela' },
+    date: { en: 'February 2025', es: 'febrero 2025' },
+    kind: { en: 'Cooking class', es: 'Clase de cocina' },
+    summary: {
+      en: 'A Costa Rican cooking class in an open-air kitchen, from the sugarcane press to the plate.',
+      es: 'Una clase de cocina costarricense en una cocina al aire libre, del trapiche al plato.',
+    },
+    delivered: {
+      en: 'Food, detail and experience photos',
+      es: 'Fotos de comida, detalles y la experiencia',
+    },
+    cover: { id: 'ar-04848', w: 2400, h: 1600, alt: { en: 'A Costa Rican casado on a wooden table: patacones, rice, beans, breaded chicken, tortillas and a starfruit juice', es: 'Un casado sobre una mesa de madera: patacones, arroz, frijoles, pollo empanizado, tortillas y un fresco con carambola' } },
+    galleryHead: { en: 'The class', es: 'La clase' },
+    galleryLead: { en: 'From the market table to dinner, in the order it was cooked.', es: 'De la mesa del mercado a la cena, en el orden en que se cocinó.' },
+    ground: [
+      cam('ar-04116', 'Bowls of tomatoes, peppers, cucumbers and limes on a dark wood table', 'Tazones de tomates, chiles, pepinos y limones sobre una mesa de madera oscura'),
+      cam('ar-04127', 'A tray of lettuce and carrots on the kitchen counter', 'Una bandeja de lechuga y zanahorias en la mesa de la cocina'),
+      cam('ar-04175', 'Fresh sugarcane juice running from a red and green trapiche', 'Jugo de caña saliendo de un trapiche rojo y verde'),
+      cam('ar-04244', 'Tomatoes, red onion, cucumber and peppers beside a yellow cutting board', 'Tomates, cebolla morada, pepino y chiles junto a una tabla amarilla'),
+      cam('ar-04249', 'A white colander of peeled citrus', 'Un colador blanco con cítricos pelados'),
+      cam('ar-04308', 'Hands straining fresh juice into a jug', 'Manos colando un fresco natural en una jarra'),
+      cam('ar-04462', 'Handmade tortillas cooking on a griddle', 'Tortillas hechas a mano en el comal'),
+      cam('ar-04508', 'Hands peeling yuca with a kitchen knife', 'Manos pelando yuca con un cuchillo'),
+      cam('ar-04604', 'A bowl of peeled yuca beside onions, limes and a starfruit', 'Un tazón de yuca pelada junto a cebollas, limones y una carambola'),
+      cam('ar-04677', 'Masa pressed into a tortilla in a lined tortilla press', 'Masa prensada en una tortillera forrada'),
+      cam('ar-04686', 'Chicken with fresh thyme in a red pot', 'Pollo con tomillo fresco en una olla roja'),
+      cam('ar-04735', 'A salad of lettuce, carrot, tomato and cucumber on a yellow board', 'Una ensalada de lechuga, zanahoria, tomate y pepino sobre una tabla amarilla'),
+      cam('ar-04777', 'A knife dicing red pepper on a white board', 'Un cuchillo picando chile dulce rojo sobre una tabla blanca'),
+      cam('ar-04848', 'The finished casado with patacones, rice, beans and chicken', 'El casado terminado con patacones, arroz, frijoles y pollo'),
+      cam('ar-04861', 'Picadillo of corn, potato and pepper beside tortillas', 'Picadillo de elote, papa y chile junto a tortillas'),
+      cam('ar-04875', 'A starfruit juice on the table at night', 'Un fresco con carambola en la mesa de noche'),
+    ],
+    aerial: [],
+    films: [],
+    ledger: [],
+  },
+];
+
+// More from the portfolio: strong frames from other jobs, shown on the home page under the project cards.
+// No property names yet; when one is known, it can move into `projects` above as its own page.
+const pf = (n, w, h, en, es) => ({ id: `pf-${n}`, full: 'full', w, h, alt: { en, es } });
+export const portfolio = [
+  pf('04', 1600, 900, 'A villa with a long infinity pool and sun loungers, from a drone', 'Una villa con una piscina larga y camastros, desde un dron'),
+  pf('01', 1600, 900, 'A covered terrace with a stone plunge pool looking out to the garden', 'Una terraza techada con una piscina de piedra frente al jardín'),
+  pf('06', 1600, 900, 'Grilled octopus plated for a restaurant menu', 'Pulpo a la parrilla emplatado para el menú de un restaurante'),
+  pf('12', 1280, 720, 'La Fortuna at night with Arenal Volcano behind', 'La Fortuna de noche con el volcán Arenal detrás'),
+  pf('07', 1600, 900, 'Salmon and asparagus over a golden purée, from above', 'Salmón y espárragos sobre un puré dorado, desde arriba'),
+  pf('14', 1600, 900, 'A plunge pool and deck hidden in the rainforest, from above', 'Una piscina y un deck escondidos en el bosque, desde arriba'),
+  pf('11', 1600, 900, 'Arenal Volcano and the green valley in daylight, from a drone', 'El volcán Arenal y el valle verde de día, desde un dron'),
+  pf('02', 1600, 900, 'An open kitchen and dining room under a timber roof', 'Cocina abierta y comedor bajo un techo de madera'),
+  pf('05', 1600, 900, 'A table set for four with plated dishes and wine', 'Una mesa para cuatro con platos servidos y vino'),
+  pf('16', 1600, 900, 'A jungle deck with loungers and a pool among the trees', 'Un deck con camastros y piscina entre los árboles'),
 ];

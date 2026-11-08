@@ -3,7 +3,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { projects } from './projects.mjs';
+import { projects, portfolio } from './projects.mjs';
 
 const SITE = join(dirname(fileURLToPath(import.meta.url)), '..');
 // the live address, used for link previews (WhatsApp, iMessage, Facebook need full URLs)
@@ -19,13 +19,13 @@ const T = {
   en: {
     htmlLang: 'en', ogLocale: 'en_US', jobTitle: 'Hospitality photographer',
     title: 'Sebastián Hidalgo Arce, hospitality photographer in La Fortuna, Costa Rica',
-    desc: 'Architecture, interior and drone photography for hotels, villas and brands around Arenal Volcano, Costa Rica.',
+    desc: 'Architecture, interior, food and drone photography for hotels, villas and brands around Arenal Volcano, Costa Rica.',
     skip: 'Skip to content', home: 'Sebastián Hidalgo Arce, home', mainNav: 'Main',
     navWork: 'Work', navFilm: 'Film', navServices: 'What I shoot', navEnquire: 'Enquire',
     other: { label: 'Español', lang: 'es' },
     heroTitle: 'Hospitality photography from the foot of Arenal.',
-    heroLead: 'Architecture, interiors and drone work for hotels, villas and brands.',
-    heroCta: 'Enquire about a shoot', heroLink: 'See the Xanadú shoot',
+    heroLead: 'Architecture, interiors, food and drone work for hotels, villas and experiences.',
+    heroCta: 'Enquire about a shoot', heroLink: 'See the Xanadú shoot', heroLinkWork: 'See the work',
     heroAlt: 'An infinity pool running toward a lawn and Arenal Volcano under a clear sky',
     heroCap: 'Pool and Arenal Volcano, Villa Xanadú, April 2026', heroFrame: 'La Fortuna, Costa Rica',
     client: 'Client', shot: 'Shot', place: 'Place', delivered: 'Delivered',
@@ -34,12 +34,13 @@ const T = {
     ledgerLead: (name) => `From the ${name} shoot: one shared folder, ready for your website, booking listings and social media.`,
     thFolder: 'Deliverable', thHolds: 'What it covers', thFiles: 'Amount',
     filmHead: 'The villa in motion', filmLead: (name) => `Drone film and a vertical reel from the ${name} shoot.`,
-    workHead: 'Villas and hotels, shot so far', workOpen: 'Open the project',
-    servicesHead: 'Rooms, facades, details and the volcano', servicesLabel: 'What I shoot',
+    workHead: 'Selected work', workLead: 'Villas, hotels and the experiences their guests book.', moreHead: 'More work', pfHead: 'More from the portfolio', pfLead: 'Villas, restaurants and the Arenal, from other jobs.',
+    servicesHead: 'Rooms, facades, food and the volcano', servicesLabel: 'What I shoot',
     services: [
       ['arch', 'Architecture', 'Facades, entrances and the roofline against the sky.', 's-architecture', 1200, '--stain-3', 'The stone entrance wall of Villa Xanadú under a timber roof edge and blue sky', 'Entrance wall, Villa Xanadú'],
       ['int', 'Interiors', 'Rooms in daylight, the wood and stone in true colour.', 's-interiors', 1200, '--stain-2', 'A bunk room with two beds below two lofted bunks and a timber ladder between them', 'Bunk room, Villa Xanadú'],
       ['det', 'Details', 'Lamps, fittings, linen: the things guests touch.', 's-details', 1200, '--stain-1', 'Two woven rattan lamps glowing beside a cane-framed mirror', 'Rattan lamps in a guest bathroom, Villa Xanadú'],
+      ['food', 'Food', 'Plates, kitchens and the hands that cook them.', 's-food', 1200, '--stain-1', 'A Costa Rican casado with patacones, rice, beans, chicken and a starfruit juice', 'Casado from the cooking class, Arenal Ridge'],
       ['air', 'From the air', 'Drone stills and film of the grounds and the volcano.', 's-air', 1012, '--stain-4', 'Arenal Volcano and the green valley below it, seen from a drone at dawn', 'Arenal Volcano from the drone, April 2026'],
     ],
     contactHead: 'Tell me about your property', contactLine: 'Send the place, the dates and where the photos will be used.',
@@ -66,13 +67,13 @@ const T = {
   es: {
     htmlLang: 'es', ogLocale: 'es_CR', jobTitle: 'Fotógrafo de hospitalidad',
     title: 'Sebastián Hidalgo Arce, fotógrafo de hospitalidad en La Fortuna, Costa Rica',
-    desc: 'Fotografía de arquitectura, interiores y dron para hoteles, villas y marcas alrededor del volcán Arenal, Costa Rica.',
+    desc: 'Fotografía de arquitectura, interiores, comida y dron para hoteles, villas y marcas alrededor del volcán Arenal, Costa Rica.',
     skip: 'Saltar al contenido', home: 'Sebastián Hidalgo Arce, inicio', mainNav: 'Principal',
     navWork: 'Trabajos', navFilm: 'Video', navServices: 'Qué fotografío', navEnquire: 'Cotizar',
     other: { label: 'English', lang: 'en' },
     heroTitle: 'Fotografía de hospitalidad al pie del Arenal.',
-    heroLead: 'Arquitectura, interiores y dron para hoteles, villas y marcas.',
-    heroCta: 'Cotizar una sesión', heroLink: 'Ver la sesión de Xanadú',
+    heroLead: 'Arquitectura, interiores, comida y dron para hoteles, villas y experiencias.',
+    heroCta: 'Cotizar una sesión', heroLink: 'Ver la sesión de Xanadú', heroLinkWork: 'Ver los trabajos',
     heroAlt: 'Una piscina infinita que corre hacia el jardín y el volcán Arenal bajo un cielo despejado',
     heroCap: 'Piscina y volcán Arenal, Villa Xanadú, abril 2026', heroFrame: 'La Fortuna, Costa Rica',
     client: 'Cliente', shot: 'Fecha', place: 'Lugar', delivered: 'Entrega',
@@ -81,12 +82,13 @@ const T = {
     ledgerLead: (name) => `De la sesión en ${name}: una carpeta compartida, lista para su web, las plataformas de reserva y redes sociales.`,
     thFolder: 'Entrega', thHolds: 'Qué incluye', thFiles: 'Cantidad',
     filmHead: 'La villa en movimiento', filmLead: (name) => `Video con dron y un reel vertical de la sesión en ${name}.`,
-    workHead: 'Villas y hoteles fotografiados', workOpen: 'Abrir el proyecto',
-    servicesHead: 'Cuartos, fachadas, detalles y el volcán', servicesLabel: 'Qué fotografío',
+    workHead: 'Trabajos', workLead: 'Villas, hoteles y las experiencias que reservan sus huéspedes.', moreHead: 'Más trabajos', pfHead: 'Más del portafolio', pfLead: 'Villas, restaurantes y el Arenal, de otros trabajos.',
+    servicesHead: 'Cuartos, fachadas, comida y el volcán', servicesLabel: 'Qué fotografío',
     services: [
       ['arch', 'Arquitectura', 'Fachadas, entradas y el techo contra el cielo.', 's-architecture', 1200, '--stain-3', 'El muro de piedra de la entrada de Villa Xanadú bajo un alero de madera y cielo azul', 'Muro de la entrada, Villa Xanadú'],
       ['int', 'Interiores', 'Luz natural, madera y piedra en su color real.', 's-interiors', 1200, '--stain-2', 'Un cuarto con dos camas bajo dos camarotes elevados y una escalera de madera entre ellos', 'Cuarto de camarotes, Villa Xanadú'],
       ['det', 'Detalles', 'Lámparas, grifería, ropa de cama: lo que tocan los huéspedes.', 's-details', 1200, '--stain-1', 'Dos lámparas tejidas de ratán encendidas junto a un espejo de bejuco', 'Lámparas de ratán en un baño, Villa Xanadú'],
+      ['food', 'Comida', 'Platos, cocinas y las manos que los preparan.', 's-food', 1200, '--stain-1', 'Un casado con patacones, arroz, frijoles, pollo y un fresco con carambola', 'Casado de la clase de cocina, Arenal Ridge'],
       ['air', 'Desde el aire', 'Fotos y video con dron del terreno y del volcán.', 's-air', 1012, '--stain-4', 'El volcán Arenal y el valle verde a sus pies, desde un dron al amanecer', 'El volcán Arenal desde el dron, abril 2026'],
     ],
     contactHead: 'Cuénteme sobre su propiedad', contactLine: 'Envíe el lugar, las fechas y dónde se usarán las fotos.',
@@ -361,23 +363,41 @@ ${t.services.map(([k, title, , img, h, , alt, cap]) => `          <section class
   </section>
 `;
 
-const workIndex = (t, P, L) => projects.length < 2 ? '' : `  <section class="work" id="work" aria-labelledby="work-title">
-    <div class="container">
-      <h2 id="work-title">${t.workHead}</h2>
-      <ol class="work__list">
-${projects.map((p) => `        <li class="work__row">
-          <a class="work__link" href="${P.project(p.slug)}">
-            <img class="work__thumb" src="${gimg(P, p.cover.id, 1200)}" width="${p.cover.w}" height="${p.cover.h}" alt="" loading="lazy" decoding="async">
+/* project cards: the home page lists every project; a project page ends with the others */
+const workCards = (P, L, list) => `      <ul class="work__grid">
+${list.map((p) => `        <li>
+          <a class="work__card" href="${P.project(p.slug)}">
+            <span class="work__frame"><img src="${gimg(P, p.cover.id, 1200)}" srcset="${gimg(P, p.cover.id, 1200)} 1200w, ${gimg(P, p.cover.id, 2400)} 2400w" sizes="(max-width: 60rem) 100vw, 50vw" width="${p.cover.w}" height="${p.cover.h}" alt="${p.cover.alt[L]}" loading="lazy" decoding="async"></span>
             <span class="work__name">${p.name}</span>
-            <span class="work__meta">${p.kind[L]}</span>
-            <span class="work__meta">${p.place[L]}</span>
-            <span class="work__meta num">${p.date[L]}</span>
+            <span class="work__meta">${p.kind[L]} · ${p.place[L].split(',')[0]} · <span class="num">${p.date[L]}</span></span>
+            <span class="work__line">${p.summary[L]}</span>
           </a>
         </li>`).join('\n')}
-      </ol>
+      </ul>`;
+
+const workIndex = (t, P, L) => projects.length < 2 ? '' : `  <section class="work" id="work" aria-labelledby="work-title">
+    <div class="container">
+      <div class="work__head">
+        <h2 id="work-title">${t.workHead}</h2>
+        <p class="lead">${t.workLead}</p>
+      </div>
+${workCards(P, L, projects)}
     </div>
   </section>
 `;
+
+const moreWork = (t, P, L, slug) => {
+  const others = projects.filter((p) => p.slug !== slug);
+  return others.length ? `  <section class="work work--more" aria-labelledby="more-title">
+    <div class="container">
+      <div class="work__head">
+        <h2 id="more-title">${t.moreHead}</h2>
+      </div>
+${workCards(P, L, others)}
+    </div>
+  </section>
+` : '';
+};
 
 /* gallery spans repeat in sevens: 7+5 / 4+4+4 / 6+6, and a pair closes any remainder */
 const SPANS = [7, 5, 4, 4, 4, 6, 6];
@@ -394,7 +414,7 @@ const gallery = (id, head, lead, items, L, P, group) => `  <section class="shoot
       </div>
       <ul class="gallery">
 ${items.map((g, i) => `        <li class="gallery__item" style="--span: ${spanFor(i, items.length)}">
-          <a class="gallery__link" href="${gimg(P, g.id, 2400)}" data-viewer="${group}" data-caption="${g.alt[L]}">
+          <a class="gallery__link" href="${gimg(P, g.id, g.full || 2400)}" data-viewer="${group}" data-caption="${g.alt[L]}">
             <img src="${gimg(P, g.id, 1200)}" width="${g.w}" height="${g.h}" alt="${g.alt[L]}" loading="lazy" decoding="async">
           </a>
         </li>`).join('\n')}
@@ -455,13 +475,14 @@ const homePage = (L) => {
           <p class="lead">${t.heroLead}</p>
           <div class="actions">
             <a class="btn" href="#contact">${t.heroCta}</a>
-            <a class="link" href="#xanadu">${t.heroLink}</a>
+            <a class="link" href="#${projects.length > 1 ? 'work' : 'xanadu'}">${projects.length > 1 ? t.heroLinkWork : t.heroLink}</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+${workIndex(t, P, L)}${portfolio.length ? gallery('portfolio', t.pfHead, t.pfLead, portfolio, L, P, 'portfolio') : ''}
   <section class="case" id="xanadu" aria-labelledby="case-title">
     <div class="container sticky-stack">
       <div class="pane-sticky">
@@ -486,7 +507,7 @@ ${p.plates.map((pl, i) => `        <figure class="plate" id="plate-${i + 1}" dat
   </section>
 
 ${ledger(t, p, L)}
-${workIndex(t, P, L)}${films(t, p, L, P)}
+${films(t, p, L, P)}
 ${services(t, P)}
 ${contact(t)}
 ` + footer(t, P, true);
@@ -514,11 +535,11 @@ const projectPage = (L, p) => {
     </div>
   </section>
 
-${gallery('ground', t.groundHead, t.groundLead, p.ground, L, P, 'ground')}
-${films(t, p, L, P)}
-${gallery('aerial', t.airHead, t.airLead, p.aerial, L, P, 'aerial')}
-${ledger(t, p, L)}
-${contact(t)}
+${gallery('ground', p.galleryHead ? p.galleryHead[L] : t.groundHead, p.galleryLead ? p.galleryLead[L] : t.groundLead, p.ground, L, P, 'ground')}
+${p.films.length ? films(t, p, L, P) : ''}
+${p.aerial.length ? gallery('aerial', t.airHead, t.airLead, p.aerial, L, P, 'aerial') : ''}
+${p.ledger.length ? ledger(t, p, L) : ''}
+${moreWork(t, P, L, p.slug)}${contact(t)}
 ` + footer(t, P, false);
 };
 
