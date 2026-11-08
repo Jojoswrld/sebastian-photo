@@ -1,11 +1,14 @@
 // Builds the site in English and Spanish from projects.mjs.
 // Run from the site folder: node _src/build.mjs
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { projects, portfolio } from './projects.mjs';
 
 const SITE = join(dirname(fileURLToPath(import.meta.url)), '..');
+// a fingerprint of the CSS and JS, added to their URLs so phones fetch the new files after every deploy
+const VER = createHash('sha1').update(['style.css', 'tokens.css', 'base.css', 'site.js'].map((f) => readFileSync(join(SITE, f))).join('')).digest('hex').slice(0, 8);
 // the live address, used for link previews (WhatsApp, iMessage, Facebook need full URLs)
 const SITE_URL = 'https://sebastian-hidalgo-photo.arenalweb.workers.dev';
 const EMAIL = 'sebastianhidalgoarce@gmail.com';
@@ -178,7 +181,7 @@ ${P.file ? `<meta property="og:url" content="${SITE_URL}/${P.file}">
 <link href="https://api.fontshare.com/v2/css?f[]=sentient@300,400&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
-<link rel="stylesheet" href="${P.a('style.css')}">
+<link rel="stylesheet" href="${P.a('style.css')}?v=${VER}">
 </head>
 <body>
 <a class="skip" href="#main">${t.skip}</a>
@@ -287,7 +290,7 @@ ${INSTAGRAM ? `      <li><a class="reach" href="https://www.instagram.com/${INST
   <button class="viewer__btn viewer__btn--close" type="button" data-viewer-close aria-label="${t.viewer.close}">${ICON.close}</button>
 </dialog>
 
-<script src="${P.a('site.js')}" defer></script>
+<script src="${P.a('site.js')}?v=${VER}" defer></script>
 <script>window.hallmarkSlots = (m) => { for (const [k, v] of Object.entries(m)) { const s = document.querySelector(\`[data-slot="\${k}"]\`); if (!s) continue; const im = new Image(); im.src = typeof v === 'string' ? v : v.src; im.alt = (typeof v === 'object' && v.alt) || s.dataset.alt || ''; s.querySelectorAll(':scope > img').forEach((o) => o.remove()); s.prepend(im); } };
 document.querySelectorAll('[data-slot] img').forEach((i) => { if (i.complete && !i.naturalWidth) i.remove(); else i.addEventListener('error', () => i.remove(), { once: true }); });</script>
 </body>
@@ -449,6 +452,9 @@ const schema = (t, P) => {
 
 /* ---------- the hero: five frames from different jobs, crossfading (site.js) ---------- */
 const HERO = [
+  { big: 'img/g/pf-14-full.jpg', small: 'img/g/pf-14-1200.jpg', w: 1600, h: 900, pos: '50% 50%',
+    alt: { en: 'A plunge pool and deck hidden in the rainforest, from above', es: 'Una piscina y un deck escondidos en el bosque, desde arriba' },
+    cap: { en: 'A plunge pool in the rainforest, from above', es: 'Una piscina en el bosque, desde arriba' } },
   { big: 'img/hero-pool-volcano.jpg', small: 'img/hero-pool-volcano-1200.jpg', w: 2400, h: 1600, pos: '50% 42%',
     alt: { en: 'An infinity pool running toward a lawn and Arenal Volcano under a clear sky', es: 'Una piscina infinita que corre hacia el jardín y el volcán Arenal bajo un cielo despejado' },
     cap: { en: 'Pool and Arenal Volcano, Villa Xanadú, April 2026', es: 'Piscina y volcán Arenal, Villa Xanadú, abril 2026' } },
@@ -461,9 +467,6 @@ const HERO = [
   { big: 'img/g/pf-04-full.jpg', small: 'img/g/pf-04-1200.jpg', w: 1600, h: 900, pos: '50% 50%',
     alt: { en: 'A villa with a long infinity pool and sun loungers, from a drone', es: 'Una villa con una piscina larga y camastros, desde un dron' },
     cap: { en: 'A villa pool from the drone', es: 'Piscina de una villa, desde el dron' } },
-  { big: 'img/g/pf-14-full.jpg', small: 'img/g/pf-14-1200.jpg', w: 1600, h: 900, pos: '50% 50%',
-    alt: { en: 'A plunge pool and deck hidden in the rainforest, from above', es: 'Una piscina y un deck escondidos en el bosque, desde arriba' },
-    cap: { en: 'A plunge pool in the rainforest, from above', es: 'Una piscina en el bosque, desde arriba' } },
 ];
 
 /* ---------- pages ---------- */
@@ -578,7 +581,7 @@ const lostPage = () => {
     </div>
   </section>
 </main>
-<script src="/site.js" defer></script>
+<script src="/site.js?v=${VER}" defer></script>
 </body>
 </html>
 `;

@@ -259,6 +259,13 @@ html.viewer-open { overflow-y: hidden; }
 
 /* ---------- small screens ---------- */
 @media (max-width: 60rem) {
+  /* the shoot details as one card (shadcn-style) and no frame list: the photos follow right below */
+  .pane-sticky .plates { display: none; }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-md) var(--space-lg); padding: var(--space-md) var(--space-lg); border: 1px solid var(--color-rule); border-radius: 12px; background: color-mix(in oklch, var(--color-card) 55%, transparent); box-shadow: 0 1px 2px color-mix(in oklch, var(--color-ink) 6%, transparent); }
+  .facts > div { grid-template-columns: minmax(0, 1fr); gap: var(--space-3xs); padding: 0; border: 0; }
+  .facts > div:first-child, .facts > div:last-child { grid-column: 1 / -1; }
+  .facts dt { padding-top: 0; font-size: var(--text-xs); letter-spacing: 0.04em; text-transform: uppercase; }
+  .facts dd { font-size: var(--text-sm); line-height: 1.45; }
   .hero__inner { min-height: 0; }
   .print__window { flex: none; aspect-ratio: 4 / 3; min-height: 0; }
   .hero h1, .hero__aside { grid-column: 1 / -1; }
