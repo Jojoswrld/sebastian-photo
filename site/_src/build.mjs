@@ -15,7 +15,7 @@ const waLink = (t) => `${WHATSAPP.href}?text=${encodeURIComponent(t.waHello)}`;
 
 const T = {
   en: {
-    htmlLang: 'en', ogLocale: 'en_US',
+    htmlLang: 'en', ogLocale: 'en_US', jobTitle: 'Hospitality photographer',
     title: 'Sebastián Hidalgo Arce, hospitality photographer in La Fortuna, Costa Rica',
     desc: 'Architecture, interior and drone photography for hotels, villas and brands around Arenal Volcano, Costa Rica.',
     skip: 'Skip to content', home: 'Sebastián Hidalgo Arce, home', mainNav: 'Main',
@@ -42,6 +42,18 @@ const T = {
     ],
     contactHead: 'Tell me about your property', contactLine: 'Send the place, the dates and where the photos will be used.',
     waHello: 'Hi Sebastián, I’d like to ask about a photo shoot for my property.',
+    form: {
+      title: 'Or send the details in one go',
+      lines: { name: 'Name', need: 'I need', use: 'For' },
+      hello: 'Hi Sebastián, I’d like a quote for a shoot.',
+      name: 'Your name', property: 'Property', propertyHint: 'Villa, hotel or brand name',
+      place: 'Where', placeHint: 'La Fortuna, Monteverde…', dates: 'Dates', datesHint: 'e.g. second week of March',
+      need: 'What you need', needs: [['camera', 'Photos'], ['drone', 'Drone photos'], ['film', 'Drone film'], ['reel', 'Vertical reel']],
+      use: 'Where the photos will be used', uses: [['web', 'Website'], ['listings', 'Airbnb or Booking'], ['social', 'Social media'], ['print', 'Print']],
+      message: 'Anything else', messageHint: 'Number of rooms, the feel you want, deadlines',
+      sendWa: 'Send on WhatsApp', sendMail: 'Send by email',
+      note: 'Opens WhatsApp or your email with your answers written in. Nothing is stored on this site.',
+    },
     email: 'Email', basedIn: 'Based in', basedWhere: 'La Fortuna, Alajuela, Costa Rica', subject: 'Photo shoot enquiry',
     footPlace: 'La Fortuna, Costa Rica, 2026', footCredit: 'Photographs: Sebastián Hidalgo Arce, Villa Xanadú, April 2026.',
     still: 'Still the background', move: 'Move the background',
@@ -52,7 +64,7 @@ const T = {
     lostTitle: 'Page not found', lostHead: 'This page isn’t here.', lostLead: 'The link may be old or mistyped. The photographs are all on the home page.',
   },
   es: {
-    htmlLang: 'es', ogLocale: 'es_CR',
+    htmlLang: 'es', ogLocale: 'es_CR', jobTitle: 'Fotógrafo de hospitalidad',
     title: 'Sebastián Hidalgo Arce, fotógrafo de hospitalidad en La Fortuna, Costa Rica',
     desc: 'Fotografía de arquitectura, interiores y dron para hoteles, villas y marcas alrededor del volcán Arenal, Costa Rica.',
     skip: 'Saltar al contenido', home: 'Sebastián Hidalgo Arce, inicio', mainNav: 'Principal',
@@ -79,6 +91,18 @@ const T = {
     ],
     contactHead: 'Cuénteme sobre su propiedad', contactLine: 'Envíe el lugar, las fechas y dónde se usarán las fotos.',
     waHello: 'Hola Sebastián, quisiera consultar por una sesión de fotos para mi propiedad.',
+    form: {
+      title: 'O envíe los detalles de una vez',
+      lines: { name: 'Nombre', need: 'Necesito', use: 'Para' },
+      hello: 'Hola Sebastián, quisiera cotizar una sesión.',
+      name: 'Su nombre', property: 'Propiedad', propertyHint: 'Nombre de la villa, hotel o marca',
+      place: 'Dónde', placeHint: 'La Fortuna, Monteverde…', dates: 'Fechas', datesHint: 'p. ej. segunda semana de marzo',
+      need: 'Qué necesita', needs: [['camera', 'Fotos'], ['drone', 'Fotos con dron'], ['film', 'Video con dron'], ['reel', 'Reel vertical']],
+      use: 'Dónde se usarán las fotos', uses: [['web', 'Sitio web'], ['listings', 'Airbnb o Booking'], ['social', 'Redes sociales'], ['print', 'Impresos']],
+      message: 'Algo más', messageHint: 'Cantidad de cuartos, el estilo que busca, fechas límite',
+      sendWa: 'Enviar por WhatsApp', sendMail: 'Enviar por correo',
+      note: 'Abre WhatsApp o su correo con sus respuestas ya escritas. Este sitio no guarda nada.',
+    },
     email: 'Correo', basedIn: 'Ubicación', basedWhere: 'La Fortuna, Alajuela, Costa Rica', subject: 'Consulta de sesión de fotos',
     footPlace: 'La Fortuna, Costa Rica, 2026', footCredit: 'Fotografías: Sebastián Hidalgo Arce, Villa Xanadú, abril 2026.',
     still: 'Detener el fondo', move: 'Mover el fondo',
@@ -182,6 +206,38 @@ const nav = (t, P, isHome) => {
 `;
 };
 
+/* enquiry form: no server. The answers are written into a WhatsApp chat or an email, and the visitor sends it.
+   Hidden until site.js runs, since it needs JS to compose the message. */
+const enquiry = (t) => {
+  const F = t.form;
+  const box = (group, items) => items.map(([v, label]) => `<label class="tick"><input type="checkbox" name="${group}" value="${label}"> <span>${label}</span></label>`).join('\n              ');
+  return `        <form class="enquiry" data-enquiry data-wa="${WHATSAPP.href}" data-mail="${EMAIL}" data-subject="${t.subject}" data-hello="${F.hello}" hidden>
+          <h3 class="enquiry__title">${F.title}</h3>
+          <div class="enquiry__grid">
+            <label class="field"><span>${F.name}</span><input name="name" autocomplete="name" data-line="${F.lines.name}" required></label>
+            <label class="field"><span>${F.property}</span><input name="property" placeholder="${F.propertyHint}" required></label>
+            <label class="field"><span>${F.place}</span><input name="place" placeholder="${F.placeHint}"></label>
+            <label class="field"><span>${F.dates}</span><input name="dates" placeholder="${F.datesHint}"></label>
+          </div>
+          <fieldset class="enquiry__group" data-line="${F.lines.need}"><legend>${F.need}</legend>
+            <div class="ticks">
+              ${box('need', F.needs)}
+            </div>
+          </fieldset>
+          <fieldset class="enquiry__group" data-line="${F.lines.use}"><legend>${F.use}</legend>
+            <div class="ticks">
+              ${box('use', F.uses)}
+            </div>
+          </fieldset>
+          <label class="field"><span>${F.message}</span><textarea name="message" rows="3" placeholder="${F.messageHint}"></textarea></label>
+          <div class="actions">
+            <button class="btn btn--solid" type="submit" value="wa">${F.sendWa}</button>
+            <button class="btn" type="submit" value="mail">${F.sendMail}</button>
+          </div>
+          <p class="enquiry__note">${F.note}</p>
+        </form>`;
+};
+
 const contact = (t) => `  <section class="contact" id="contact" data-air-zone aria-labelledby="contact-title">
     <div class="container contact__inner">
       <div class="card stock">
@@ -194,6 +250,7 @@ const contact = (t) => `  <section class="contact" id="contact" data-air-zone ar
           <div><dt>WhatsApp</dt><dd><a class="card__link" href="${waLink(t)}">${WHATSAPP.label}</a></dd></div>
           <div><dt>${t.basedIn}</dt><dd>${t.basedWhere}</dd></div>
         </dl>
+${enquiry(t)}
       </div>
     </div>
   </section>
@@ -345,12 +402,38 @@ ${items.map((g, i) => `        <li class="gallery__item" style="--span: ${spanFo
   </section>
 `;
 
+/* ---------- Google business details (schema.org), on the home pages only ---------- */
+const schema = (t, P) => {
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    '@id': `${SITE_URL}/#business`,
+    name: 'Sebastián Hidalgo Arce',
+    description: t.desc,
+    url: `${SITE_URL}/${P.file === 'index.html' ? '' : P.file.replace('index.html', '')}`,
+    image: `${SITE_URL}/img/og.jpg`,
+    logo: `${SITE_URL}/img/apple-touch-icon.png`,
+    email: EMAIL,
+    telephone: '+506 8307 1130',
+    address: { '@type': 'PostalAddress', addressLocality: 'La Fortuna', addressRegion: 'Alajuela', addressCountry: 'CR' },
+    geo: { '@type': 'GeoCoordinates', latitude: 10.4678, longitude: -84.6427 },
+    areaServed: [
+      { '@type': 'Place', name: 'Arenal Volcano, Costa Rica' },
+      { '@type': 'Country', name: 'Costa Rica' },
+    ],
+    knowsLanguage: ['es', 'en'],
+    founder: { '@type': 'Person', name: 'Sebastián Hidalgo Arce', jobTitle: t.jobTitle },
+    makesOffer: t.services.map(([, title, line]) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: title, description: line } })),
+  };
+  return `<script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n</script>\n`;
+};
+
 /* ---------- pages ---------- */
 const homePage = (L) => {
   const t = T[L], P = page(L, 'home');
   const p = projects.find((x) => x.featured) || projects[0];
   const total = p.ground.length + p.aerial.length;
-  return head(t, P, t.title) + nav(t, P, true) + `
+  return head(t, P, t.title).replace('</head>', schema(t, P) + '</head>') + nav(t, P, true) + `
 <main id="main">
 
   <section class="hero" data-air-zone aria-labelledby="hero-title">

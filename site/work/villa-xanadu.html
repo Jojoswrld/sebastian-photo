@@ -309,6 +309,37 @@
           <div><dt>WhatsApp</dt><dd><a class="card__link" href="https://wa.me/50683071130?text=Hi%20Sebasti%C3%A1n%2C%20I%E2%80%99d%20like%20to%20ask%20about%20a%20photo%20shoot%20for%20my%20property.">+506&nbsp;8307&nbsp;1130</a></dd></div>
           <div><dt>Based in</dt><dd>La Fortuna, Alajuela, Costa Rica</dd></div>
         </dl>
+        <form class="enquiry" data-enquiry data-wa="https://wa.me/50683071130" data-mail="sebastianhidalgoarce@gmail.com" data-subject="Photo shoot enquiry" data-hello="Hi Sebastián, I’d like a quote for a shoot." hidden>
+          <h3 class="enquiry__title">Or send the details in one go</h3>
+          <div class="enquiry__grid">
+            <label class="field"><span>Your name</span><input name="name" autocomplete="name" data-line="Name" required></label>
+            <label class="field"><span>Property</span><input name="property" placeholder="Villa, hotel or brand name" required></label>
+            <label class="field"><span>Where</span><input name="place" placeholder="La Fortuna, Monteverde…"></label>
+            <label class="field"><span>Dates</span><input name="dates" placeholder="e.g. second week of March"></label>
+          </div>
+          <fieldset class="enquiry__group" data-line="I need"><legend>What you need</legend>
+            <div class="ticks">
+              <label class="tick"><input type="checkbox" name="need" value="Photos"> <span>Photos</span></label>
+              <label class="tick"><input type="checkbox" name="need" value="Drone photos"> <span>Drone photos</span></label>
+              <label class="tick"><input type="checkbox" name="need" value="Drone film"> <span>Drone film</span></label>
+              <label class="tick"><input type="checkbox" name="need" value="Vertical reel"> <span>Vertical reel</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="enquiry__group" data-line="For"><legend>Where the photos will be used</legend>
+            <div class="ticks">
+              <label class="tick"><input type="checkbox" name="use" value="Website"> <span>Website</span></label>
+              <label class="tick"><input type="checkbox" name="use" value="Airbnb or Booking"> <span>Airbnb or Booking</span></label>
+              <label class="tick"><input type="checkbox" name="use" value="Social media"> <span>Social media</span></label>
+              <label class="tick"><input type="checkbox" name="use" value="Print"> <span>Print</span></label>
+            </div>
+          </fieldset>
+          <label class="field"><span>Anything else</span><textarea name="message" rows="3" placeholder="Number of rooms, the feel you want, deadlines"></textarea></label>
+          <div class="actions">
+            <button class="btn btn--solid" type="submit" value="wa">Send on WhatsApp</button>
+            <button class="btn" type="submit" value="mail">Send by email</button>
+          </div>
+          <p class="enquiry__note">Opens WhatsApp or your email with your answers written in. Nothing is stored on this site.</p>
+        </form>
       </div>
     </div>
   </section>

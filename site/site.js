@@ -201,6 +201,30 @@
     loops.forEach((v) => lio.observe(v));
   }
 
+  /* ---------- enquiry form: write the answers into WhatsApp or an email ---------- */
+  document.querySelectorAll('[data-enquiry]').forEach((form) => {
+    form.hidden = false;
+    const label = (el) => el.dataset.line || el.closest('label, fieldset').querySelector('span, legend').textContent.trim();
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const lines = [form.dataset.hello, ''];
+      const add = (el) => { if (el.value.trim()) lines.push(`${label(el)}: ${el.value.trim()}`); };
+      form.querySelectorAll('input:not([type="checkbox"])').forEach(add);
+      form.querySelectorAll('fieldset').forEach((fs) => {
+        const on = [...fs.querySelectorAll('input:checked')].map((c) => c.value);
+        if (on.length) lines.push(`${label(fs)}: ${on.join(', ')}`);
+      });
+      form.querySelectorAll('textarea').forEach(add); // the free note goes last
+      const text = lines.join('\n');
+      const via = e.submitter && e.submitter.value;
+      const url = via === 'mail'
+        ? `mailto:${form.dataset.mail}?subject=${encodeURIComponent(form.dataset.subject)}&body=${encodeURIComponent(text)}`
+        : `${form.dataset.wa}?text=${encodeURIComponent(text)}`;
+      if (via === 'mail') location.href = url;
+      else window.open(url, '_blank', 'noopener');
+    });
+  });
+
   /* ---------- the photo viewer ---------- */
   const dlg = document.querySelector('.viewer');
   if (dlg && typeof dlg.showModal === 'function') {
