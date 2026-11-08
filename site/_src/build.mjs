@@ -10,6 +10,8 @@ const SITE = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE_URL = 'https://sebastian-hidalgo-photo.arenalweb.workers.dev';
 const EMAIL = 'sebastianhidalgoarce@gmail.com';
 const WHATSAPP = { href: 'https://wa.me/50683071130', label: '+506&nbsp;8307&nbsp;1130' };
+// Sebastián's Instagram handle, without the @. Leave empty and the footer simply leaves Instagram out.
+const INSTAGRAM = 'sebastianhidalgocr';
 // the first line of the chat, already typed when someone taps the WhatsApp link
 const waLink = (t) => `${WHATSAPP.href}?text=${encodeURIComponent(t.waHello)}`;
 
@@ -43,7 +45,6 @@ const T = {
     contactHead: 'Tell me about your property', contactLine: 'Send the place, the dates and where the photos will be used.',
     waHello: 'Hi Sebastián, I’d like to ask about a photo shoot for my property.',
     form: {
-      title: 'Or send the details in one go',
       lines: { name: 'Name', need: 'I need', use: 'For' },
       hello: 'Hi Sebastián, I’d like a quote for a shoot.',
       name: 'Your name', property: 'Property', propertyHint: 'Villa, hotel or brand name',
@@ -55,7 +56,7 @@ const T = {
       note: 'Opens WhatsApp or your email with your answers written in. Nothing is stored on this site.',
     },
     email: 'Email', basedIn: 'Based in', basedWhere: 'La Fortuna, Alajuela, Costa Rica', subject: 'Photo shoot enquiry',
-    footPlace: 'La Fortuna, Costa Rica, 2026', footCredit: 'Photographs: Sebastián Hidalgo Arce, Villa Xanadú, April 2026.',
+    footNav: 'Footer',
     still: 'Still the background', move: 'Move the background',
     viewer: { label: 'Photo viewer', close: 'Close', prev: 'Previous photo', next: 'Next photo', of: 'of' },
     groundHead: 'On the ground', groundLead: 'Rooms, pool and details, shot on camera.',
@@ -92,7 +93,6 @@ const T = {
     contactHead: 'Cuénteme sobre su propiedad', contactLine: 'Envíe el lugar, las fechas y dónde se usarán las fotos.',
     waHello: 'Hola Sebastián, quisiera consultar por una sesión de fotos para mi propiedad.',
     form: {
-      title: 'O envíe los detalles de una vez',
       lines: { name: 'Nombre', need: 'Necesito', use: 'Para' },
       hello: 'Hola Sebastián, quisiera cotizar una sesión.',
       name: 'Su nombre', property: 'Propiedad', propertyHint: 'Nombre de la villa, hotel o marca',
@@ -104,7 +104,7 @@ const T = {
       note: 'Abre WhatsApp o su correo con sus respuestas ya escritas. Este sitio no guarda nada.',
     },
     email: 'Correo', basedIn: 'Ubicación', basedWhere: 'La Fortuna, Alajuela, Costa Rica', subject: 'Consulta de sesión de fotos',
-    footPlace: 'La Fortuna, Costa Rica, 2026', footCredit: 'Fotografías: Sebastián Hidalgo Arce, Villa Xanadú, abril 2026.',
+    footNav: 'Pie de página',
     still: 'Detener el fondo', move: 'Mover el fondo',
     viewer: { label: 'Visor de fotos', close: 'Cerrar', prev: 'Foto anterior', next: 'Foto siguiente', of: 'de' },
     groundHead: 'En tierra', groundLead: 'Cuartos, piscina y detalles, con cámara.',
@@ -115,6 +115,9 @@ const T = {
 };
 
 const ICON = {
+  mail: '<svg class="reach__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg>',
+  whatsapp: '<svg class="reach__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.6 20.4 4.9 16A8.6 8.6 0 1 1 8 19.1z"/><path d="M9.2 8.4c.2-.4.5-.5.8-.5h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.7l-.5.6c.6 1.1 1.4 1.9 2.5 2.5l.6-.5c.2-.2.5-.2.7-.1l1.5.6c.3.1.4.3.4.5v.5c0 .3-.1.6-.5.8-.6.4-1.4.5-2.1.3-2.4-.7-4.3-2.6-5-5-.2-.7-.1-1.5.1-2.3z"/></svg>',
+  instagram: '<svg class="reach__icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="0.6" fill="currentColor"/></svg>',
   close: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
   prev: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>',
   next: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>',
@@ -212,7 +215,6 @@ const enquiry = (t) => {
   const F = t.form;
   const box = (group, items) => items.map(([v, label]) => `<label class="tick"><input type="checkbox" name="${group}" value="${label}"> <span>${label}</span></label>`).join('\n              ');
   return `        <form class="enquiry" data-enquiry data-wa="${WHATSAPP.href}" data-mail="${EMAIL}" data-subject="${t.subject}" data-hello="${F.hello}" hidden>
-          <h3 class="enquiry__title">${F.title}</h3>
           <div class="enquiry__grid">
             <label class="field"><span>${F.name}</span><input name="name" autocomplete="name" data-line="${F.lines.name}" required></label>
             <label class="field"><span>${F.property}</span><input name="property" placeholder="${F.propertyHint}" required></label>
@@ -245,11 +247,6 @@ const contact = (t) => `  <section class="contact" id="contact" data-air-zone ar
           <h2 id="contact-title">${t.contactHead}</h2>
           <p class="card__line">${t.contactLine}</p>
         </div>
-        <dl class="card__fields">
-          <div><dt>${t.email}</dt><dd><a class="card__link" href="mailto:${EMAIL}?subject=${encodeURIComponent(t.subject)}">${EMAIL}</a></dd></div>
-          <div><dt>WhatsApp</dt><dd><a class="card__link" href="${waLink(t)}">${WHATSAPP.label}</a></dd></div>
-          <div><dt>${t.basedIn}</dt><dd>${t.basedWhere}</dd></div>
-        </dl>
 ${enquiry(t)}
       </div>
     </div>
@@ -264,15 +261,22 @@ const footer = (t, P, isHome) => {
   <div class="container footer__inner">
     <p class="footer__signoff">Hasta pronto,</p>
     <p class="footer__name">Sebastián Hidalgo Arce</p>
-    <div class="footer__meta">
-      <p>${t.footPlace}</p>
-      <p>${t.footCredit}</p>
+    <ul class="footer__contact">
+      <li><a class="reach" href="mailto:${EMAIL}?subject=${encodeURIComponent(t.subject)}">${ICON.mail}<span class="reach__text"><span class="reach__kind">${t.email}</span>${EMAIL}</span></a></li>
+      <li><a class="reach" href="${waLink(t)}">${ICON.whatsapp}<span class="reach__text"><span class="reach__kind">WhatsApp</span>${WHATSAPP.label}</span></a></li>
+${INSTAGRAM ? `      <li><a class="reach" href="https://www.instagram.com/${INSTAGRAM}/" rel="me">${ICON.instagram}<span class="reach__text"><span class="reach__kind">Instagram</span>@${INSTAGRAM}</span></a></li>\n` : ''}    </ul>
+    <nav class="footer__nav" aria-label="${t.footNav}">
       <ul class="footer__links">
         <li><a href="${h}#${projects.length > 1 ? 'work' : 'xanadu'}">${projects.length > 1 ? t.navWork : 'Villa Xanadú'}</a></li>
+        <li><a href="${h}#film">${t.navFilm}</a></li>
         <li><a href="${h}#services">${t.navServices}</a></li>
         <li><a href="#contact">${t.navEnquire}</a></li>
-        <li><button class="link link--button" type="button" data-air-toggle data-label-still="${t.still}" data-label-move="${t.move}" aria-pressed="false">${t.still}</button></li>
+        <li><a href="${P.swap}" hreflang="${t.other.lang}" lang="${t.other.lang}">${t.other.label}</a></li>
       </ul>
+    </nav>
+    <div class="footer__base">
+      <p>© 2026 Sebastián Hidalgo Arce · ${t.basedWhere}</p>
+      <span class="footer__toggle"><button class="link link--button" type="button" data-air-toggle data-label-still="${t.still}" data-label-move="${t.move}" aria-pressed="false">${t.still}</button></span>
     </div>
   </div>
 </footer>
