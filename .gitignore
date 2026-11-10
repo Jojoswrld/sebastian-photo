@@ -7,3 +7,8 @@ node_modules/
 
 # deploy staging copy of the site
 site/_deploy/public/
+
+# local secrets (dotenv and Wrangler)
+.env
+.env.*
+.dev.vars
