@@ -10,7 +10,7 @@ const SITE = join(dirname(fileURLToPath(import.meta.url)), '..');
 // a fingerprint of the CSS and JS, added to their URLs so phones fetch the new files after every deploy
 const VER = createHash('sha1').update(['style.css', 'tokens.css', 'base.css', 'site.js'].map((f) => readFileSync(join(SITE, f))).join('')).digest('hex').slice(0, 8);
 // the live address, used for link previews (WhatsApp, iMessage, Facebook need full URLs)
-const SITE_URL = 'https://sebastian-hidalgo-photo.arenalweb.workers.dev';
+const SITE_URL = 'https://sebastian-hidalgo-photo.lavalogic.workers.dev';
 const EMAIL = 'sebastianhidalgoarce@gmail.com';
 const WHATSAPP = { href: 'https://wa.me/50683071130', label: '+506&nbsp;8307&nbsp;1130' };
 // Sebastián's Instagram handle, without the @. Leave empty and the footer simply leaves Instagram out.
